@@ -1,0 +1,158 @@
+\documentclass[]{article}
+     \usepackage[italian]{babel}
+	 \usepackage[utf8]{inputenc}
+	 \usepackage[colorlinks]{hyperref}
+	 \hypersetup{citecolor=DarkScarlet}
+	 \hypersetup{linkcolor=DarkRed}
+	 \usepackage{cleveref}
+	 \usepackage{amssymb}
+
+%opening
+\title{Un tentativo di riassunto di metodi}
+\author{Bruno Bucciotti}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Estratto di ciò che ho studiato preparando l'esame. Non si claima alcuna completezza e anzi si assume di avere già studiato gli appunti e che si abbia una certa familiarità con gli esercizi; lo scopo principale è di raccogliere il materiale per portarlo all'esame scritto per pronta consultazione. Qualche divagazione su eventuali trucchi per fare certi tipi di esercizio è relegata alle appendici, che sono quindi tipo esercizio svolto. E' possibile che alcune cose indicate siano bbbanaali per alcuni, ma volevo fare una raccolta anche delle cose principali su cui sono inciampato esercitandomi. Good luck.
+\end{abstract}
+
+\section*{Trasformata di Fourier}
+Definizioni: F[f(x)]($\omega$) = $\hat{f}(\omega)$ = $\int_{-\infty}^{+\infty} f(x) e^{i\omega x} dx$ = g($\omega$). La trasformata di Fourier è un operatore lineare
+\\ \\
+Tipo una inversione: F[g(x)]($\omega$) = 2$\pi$f(-$\omega$)
+\\
+Vera inversione: $F^{-1}[\hat{f}(\omega)] = \frac{1}{2\pi} \int_{-\infty}^{+\infty} \hat{f}(\omega) e^{-i\omega x} d\omega$
+\\ \\
+Parsevall: $(\hat{f}, \hat{g}) = 2\pi(f, g)$
+\\
+Trasformata di $x^kf(x)$ e  derivata della trasformata: $x^kf(x) \in \mathbb{L}^1$ allora $\hat{f} \in C^k$ e $\frac{d^k\hat{f}}{d\omega^k}(\omega) = F[(ix)^k f(x)](\omega)$\, trucco su questo in appendice A
+\\
+Trasformata della derivata: $F[f^{(k)}]=(-i\omega)^k \hat{f}(\omega)$
+\\ \\
+\section*{Operatori}
+Cercando gli autovalori, ricordare 0 che spesso si comporta in modo particolare\\
+Se un operatore sembra brutto (tipo integrale), provare a scriverlo come combinazione lineare di funzioni di base moltiplicate per prodotti scalari (vedi appendice B). Appendice F per un caso in cui questo fallisce.\\
+Disuguaglianze: $||Tx||\leq||T||\,||x||$\\$||TG||\leq||T||\,||G||$\\
+Aggiunto: $T^\dagger$ è continuo quando $T$ è continuo. $||T|| = ||T^\dagger||$. $||TT^\dagger|| = ||T||^2$\\ \\
+Per mostrare che un vettore è nullo può essere utile guardarne la norma. \\Appendice E per un esercizio su questo e su $T^\dagger T$ \\
+Unitari: $U: H\rightarrow H$ con $U(H)=H; (Ux, Uy) = (x, y)$\\
+Unitarietà implica: U limitato, biunivoco, $U^{-1}$ unitario, $U^{-1} = U^\dagger$\\
+Per verificarla basta: 1) $U(H)=H, lineare ||Ux|| = ||x||$\\
+2) limitato, U(H) = H e $U^{-1} = U^\dagger$\\
+NB: se un operatore conserva i prodotti scalari ma l'immagine non è tutto H allora si dice solo Isometrico\\
+\\
+Normali: $T T^\dagger = T^\dagger T$. Allora $Tx = \lambda x\rightarrow T^\dagger x = \lambda^* x$. Autovettori a autovalori diversi sono orto. Una nota su questo in appendice B.\\
+Sarebbero da mettere gli operatori compatti.. Solo che non capitano quasi mai
+\\ \\
+Proiettori: P lineare, limitato, $P^2=P$, $P=P^\dagger$. Autovalori 0 e 1.
+Criteri: 1) $P^2=P, (Px, y)=(x, Py)$\\
+2) $P^2=P$ lineare limitato, Im(P) ortogonale a ker(P)\\
+Conto: Ipotesi: $T^2=T$; Tesi: $Im(T) = \{x|Tx=x\}$. $\supseteq$ è ovvio; $y\in Im(T), \exists x: Tx=y, T^2x = Ty = Tx = y \rightarrow Ty=y$\\
+Due proiettori: $P_1, P_2$ proiettanti su $H_1, H_2$. $P=^{def}P_1P_2$. P proiettore $\iff$ $P_1P_2=P_2P_1$ e, nel caso, $Im(P) = H_1\cap H_2$\\
+Spesso con i proiettori aiuta scrive il generico vettore x come y+z dove $Py=y,\,Pz=0$. Vedi appendice E per esercizio con proiettori\\
+\\
+Verificare la (non) continuità di un operatore equivale a mostrare che (non) è limitato. $||T|| = sup\frac{||Tx||}{||x||}$\\
+T limitato su combinazioni lineari finite di vettori di sistema denso in H (es, un sistema completo) implica che T si estende con continuità a tutto H, stessa norma di prima.\\
+\\
+
+\section*{Serie di Fourier}
+Introduciamo $\mathcal{L}$a base di $\mathbb{L}^2(-\pi, \pi)$: 1, $sin(nx)$, $cos(nx)$. Gli integrali sono tutti sul dominio opportuno\\
+Verificare la completezza di $\{e_n\}$: mostrare che $(\forall n,\ (e_n, f)=0) \rightarrow f=0$. Di solito si usa in combinazione con $\mathcal{L}$a base.\\
+Vedi appendice C (e D) per trucco importante che dimostra la completezza di quasi tutti gli insiemi effettivamente completi. In particolare\\
+
+In $\mathbb{L}^2(0, \pi)$ sono basi $\{sin(nx)\}_1^\infty$; 1 insieme a $\{cos(nx)\}_1^\infty$\\
+
+Ricavare coefficienti della serie di Fourier: $f(x) = \sum c_ne_n \rightarrow c_n = \frac{1}{||e_n||^2} \int e_n^*(x) f(x)dx$\\
+
+1 in base di seni: $1 = \frac{4}{\pi} \sum \frac{2k+1 x}{2k+1}$ (Nelle basi che hanno anche la funzione costante questo è lasciato come esercizio)\\
+
+Criteri di convergenza per la serie S (non proprio ottimali):
+\begin{itemize}
+	\item puntuale in x: basta che $\exists f'(x^+), f'(x^-)$ affinchè $S(x) = \frac{f(x^+)+f(x^-)}{2}$; se i limiti destro e sinistro in x per la f coincidono allora la serie converge a quel valore, altrimenti alla media dei due valori. Questo si applica anche agli estremi dell'intervallo posto di estendere in modo periodico
+	\item uniforme: 1) Periodicità sull'intervallo (cioè $f(-\pi)=f(\pi)$ ad esempio), $f \in C^1$ (oppure $f \in C^0$ derivabile e $f'\in \mathbb{L}^1$)\\
+	2) $\sum |c_n| < \infty$
+	\item In $\mathbb{L}^2$.. è un segreto ;)
+\end{itemize}
+
+Classe della f e andamento dei coefficienti: $\sum n^k |a_n| < \infty \rightarrow f \in C^k$ e tautotrivialmente $n^k a_n \rightarrow 0$.\\
+
+Attenzionissima derivata normale!: Nei problemi $\triangle u=0$ trova u, quando si dice derivata normale la si intende "uscente" dal dominio, quindi per esempio se ho come dominio una corona circolare $\frac{\partial u}{\partial r} (R_{esterno}, \phi) = \frac{\partial u}{\partial n}$, ma nel caso di r interno c'è un meno a sinistra!
+
+\section*{Proprietà di $\mathbb{L}^{1\,e\,2}$}
+
+Su dominio finito $\mathbb{L}^2\subseteq \mathbb{L}^1$. $f \in \mathbb{L}^1 \rightarrow \int_{0}^{x} f(t) dt \in C^0$.\\
+
+Trickkino: $f \in \mathbb{L}^2$ e $g \in \mathbb{L}^1$ $\rightarrow \hat{f}\hat{g} \in \mathbb{L}^2$ perchè $\hat{f}$ c'è, poi a infinito g va a 0 quindi migliora solo, e negli eventuali punti in cui $\hat{f}$ esplode in modo sensato $\hat{g}$, essendo limitata, non peggiora gravemente la situazione.\\
+
+Disuguaglianza fra norme su dominio limitato D: $||f||_1 \leq \sqrt{\mu(D)} ||f||_2$ (vedi appendice F)\\
+
+Cannoncino: $f \in \mathbb{L}^p$ e $g \in \mathbb{L}^q$, $\frac{1}{p} + \frac{1}{q} = 1 + \frac{1}{r}$, $1 \leq p,q,r \leq \infty$ allora $||f*g||_r \leq ||f||_p ||g||_q$\\ \\
+
+
+Accaso-giustoPer: $f\in C^k$, f periodica, $f^{(k+1)} \in \mathbb{L}^1$, allora $n^{k+1} a_n \rightarrow 0$
+
+\section*{Convergenza dominata}
+a.k.a. come formalizzare l'abuso $\lim \int f_n(x) dx = \int f(x) dx$ dove f(x) è il limite puntuale delle $f_n$: basta trovare una g(x) integrabile t.c. $\forall n,\,x,\, |f_n(x)| \leq g(x)$.\\
+
+\section*{Equivalenza norme in dimensione finita}
+Prendo $x = \sum_{1}^{N} a_n\,e_n$ con $e_n$ base canonica, da cui $||x|| = \sqrt{\sum_{1}^{N} a_n^2}$. Voglio studiare la norma $|||*|||$ generica. $|||x||| \leq_{triangolare} \sum_{1}^{N} a_n\, |||e_n||| \leq_{massimo\,|||e_n|||} M\,(\frac{\sum a_n}{n} n) \leq_{medie} M\,n\,\sqrt{\frac{\sum a_n^2}{n}} = M \sqrt{N} ||x||$. L'altro verso si fa solitamente con idee simili (e la dimostrazione generale è non costruttiva, quindi non la presento).
+
+\section*{Trig(-gered)}
+$sin^3(x) = \frac{1}{4} (3sinx-sin3x)$\, $cos^3(x) = \frac{1}{4} (3cosx+cos3x)$\\ \\
+$sin\alpha\, cos\beta = \frac{1}{2} [sin(\alpha-\beta)+sin(\alpha+\beta)]$\\
+$sin\alpha\, sin\beta = \frac{1}{2} [cos(\alpha-\beta)-cos(\alpha+\beta)]$\\
+$cos\alpha\, cos\beta = \frac{1}{2} [cos(\alpha-\beta)+cos(\alpha+\beta)]$\\
+
+\section*{Formula di Poisson}
+Ovverosia in risolutore di integrali apparentemente insolubili:\\
+$u(r, \phi) = \frac{R^2-r^2}{2\pi} \int_{0}^{2\pi} \frac{f(\theta)}{R^2+r^2-2Rrcos(\theta-\phi)}$
+con $u(r, \phi)$ noto facilmente nei 2 seguenti casi:
+\begin{itemize}
+	\item $f(\theta) = cos(n\theta) \rightarrow u(r, \phi) = \frac{r^n}{R^n} cos(n\phi)$
+	\item $f(\theta) = sin(n\theta) \rightarrow u(r, \phi) = \frac{r^n}{R^n} sin(n\phi)$
+\end{itemize}
+L'idea è di fittare il denominatore dell'integrale trovando R e r. Notare che $R, r \ge 0$ e che $cos(\theta-\pi/2)=sin(\theta)$, perciò scegliere $\phi$ di conseguenza
+
+\section*{Appendice A}
+Approfondimenti su Beppe :) le idee che volevo presentare erano che se f è $\mathbb{L}^1$ allora la trasformata è continua e va a 0 a infinito. Questo aiuta quando non è nota la trasformata ma solo la sua derivata di un certo ordine: in questo caso si integra e si impone la condizione sul limite a infinito. Se questa è banale (es viene Ae(-x) con A incognita) spesso aiuta guardare il valore della trasformata in 0 (sparisce la "complessità" nella definizione XD).
+
+\section*{Appendice B}
+Ogni tanto farebbe davvero comodo un sistema completo di autovettori, magari per studiare un operatore apparentemente sgradevole.. presento un esercizio al riguardo (es.4 compito Bracci del 13/1/03). E'molto ricco di idee\\
+ In L2(0,1) si consideri l’operatore T tale che Tf=g, con $g(x) = \int_{0}^{1} (1-xy) f(y) dy$. Mostrare che T e’ limitato, trovarne la norma, trovarne autovalori e autovettori\\
+ Manipolando un po'l'integrale si cerca di portare fuori ogni traccia della x e di lasciare nell'integrale solo la y (la variabile integrata). Si ottiene
+ $$(Tf)(x) = 1(1,f) - x(x,f)$$
+ dove 1 è la funzione costante 1 da 0 a 1; si osservi che questa è una combinazione lineare finita di 2 funzioni. Questo già dimostra che l'operatore è limitato, poichè valgono le seguenti maggiorazioni (la prima è brutale, si può fare di meglio facendo più attenzione a 1-xy<1, ma la triangolare è molto generale; la seconda è Schwarz). La norma di x è $3^{-\frac{1}{2}}$
+ $$||Tf||\leq ||1(1,f)||+||x(x,f)||\leq|(1,f)| + \frac{1}{\sqrt{3}} |(x,f)| \leq \frac{4}{3}||f||$$
+ 
+ Per trovare la norma sarebbe molto bello avere un sistema completo di autovettori, in modo da invocare un teorema che afferma che \textbf{la norma di T è il sup degli autovalori}, visto che non c'è un modo evidente di costruire una candidata funzione f che saturi la disuguaglianza sopra. Dunque indaghiamo per prima cosa il caso $\lambda=0$: si tratta banalmente delle funzioni ortogonali a 1 e x, poichè in tal modo i coefficienti della combinazione lineare sono nulli. Si tratta di un mucchio di funzioni! Basta prendere un sistema ortonormale completo di questo spazio e questo sarà formato da autovettori. I casi restanti sono per funzioni che siano combinazione lineare di costante e x, diciamo $f=\alpha + \beta x$. Cercando autovettori si ha $Tf=\lambda f$, cioè
+ $$1 \int_{0}^{1}1(\alpha+x\beta) dx -x \int_{0}^{1}x(\alpha+x\beta) dx = \lambda \alpha + \lambda \beta x$$
+ 
+ Svolgendo gli integrali e comparando i coefficienti si arriva a un sistema in incognite $\alpha,\, \beta$ con 2 equazioni omogeneo. Per evitare trivialità serve il determinante nullo, da cui si ricavano i due $\lambda_{1,2}=\frac{2\pm\sqrt{7}}{6}$. Dunque nello spazio di dimensione 2 delle funzioni combinazione lineare di 1 e x abbiamo due autovalori=>autovettori formano una base (geometria 1) e poichè sono relativi ad autovalori diversi sono ortogonali fra loro e anche ortogonali a quelli relativi a $\lambda=0$ (del resto abbiamo detto che quello era lo spazio delle funzioni ortogonali a 1 e x, no? chiaro che siano ortogonali al sottospazio spannato da 1 e x). Abbiamo dunque un sistema ortonormale completo di autovettori per lo spazio secondo l'operatore T. Dunque $||T|| = sup\, \lambda = \frac{2+\sqrt{7}}{6}$
+
+\section*{Appendice C}
+Seguite \href{https://youtu.be/LeOc8zVs86U?t=259}{la spiegazione di Vera} e anche voi saprete cucinare una base per $(0, \pi)$! (Non ho creato né Pokemon né il video). Lo slogan è \textsc{Estendi, Espandi, Estingui}\\
+Per esempio mostriamo che $\mathbb{L}^2(0, \pi)$ ammette come base $\{sin(nx)\}_1^\infty$. Prendo una generica f definita su $(0, \pi)$ e la \textsc{Estendo} all'intervallo $(-\pi, \pi)$ in modo dispari, avendo notato che sono dispari anche le funzioni della presunta base: dunque $f(0) = 0$ e $f(-x) = -f(x)$ per x positivo. Ora uso $\mathcal{L}$a base e \textsc{Espando} f; si ha $f(x) = c + \sum a_n sin(nx) + \sum b_n cos(nx)$, ma notando che l'ho fatta dispari so che si cancelleranno i coefficienti delle funzioni pari, perciò $f(x) = \sum a_n sin(nx)$. Ora basta osservare che se \textsc{Estinguo} la parte fittizia con x negative mi resta proprio la f generica espansa in serie di seni sull'intervallo voluto!
+Il ragionamento si può ripetere facendo una estensione pari e considerando come base i coseni con la costante (che diciamoci la verità è solo un altro coseno).
+
+\section*{Appendice D}
+Ora che avete appreso le basi della cucina è tempo che \href{https://youtu.be/LeOc8zVs86U?t=88}{Misty vi insegni qualche piatto più complesso}: oggi mostriamo che $cos(\frac{2k+1}{2} x)$ più la costante sono base di $(0, \pi)$. La strategia è simile a prima (cioè ricondursi a una base nota) ma stavolta estendere f è più sottile. Grafichiamo $cos(\frac{1}{2} x)$ fra 0 e $2\pi$: è metà cos(x) a meno di scalare l'asse x, e osservo che è dispari (cioè antisimmetrica) rispetto $\pi$. $cos(\frac{2k+1}{2} x)$ sono in pratica i soliti coseni solo scalati nella x e dispari rispetto a $\pi$. Questo suggerisce di \textsc{Estendere} f in modo dispari rispetto a $\pi$ fino a $2\pi$ e \textsc{Espandere} nella base dei coseni di $(0, 2\pi)$, che si ottiene riscalando quella già menzionata ottenendo 1 insieme a $cos(n \frac{x}{2})$. Ora però osservo che per n pari il coseno è pari rispetto a $\pi$ (questa cosa va vista con disegni, non dimostrata formalmente), perciò queste funzioni non serviranno per espandere f che quindi può essere scritta come serie dei soli $cos(\frac{2k+1}{2} x)$. \textsc{Estinguendo} la parte artificiosa di f si ha l'espansione voluta.
+
+\section*{Appendice E}
+Es 4 del 7/2/06: In uno spazio di Hilbert H è dato un operatore $P = T^\dagger T$, con T limitato. Mostrare che P è limitato e che $Px = 0 \iff Tx = 0$. Mostrare che se P è un proiettore su $H'$, $H = H' \bigoplus H''$, allora vale $Tx = TT^\dagger Tx$ e viceversa. Mostrare che in questo caso anche $Q = TT^\dagger$ è un proiettore. Mostrare che (sempre in questo caso) è $H' = \Delta T^\dagger = \{x | x = T^\dagger z\}$.\\ \\
+E' noto che $||P|| = ||T||^2$, quindi P è limitato. $Tx=0 \rightarrow Px=0$ è ovvio, mentre l'altra freccia si fa con il trucco del guardare la norma del vettore che vogliamo sia nullo: $||Tx||^2 = (Tx, Tx) = (x, Px) = 0$.\\
+Sapendo che P è proiettore posso scrivere $x = y+z$ con $y\in H'$, $z\in H''$ da cui $Py=y$, $Pz=0$. Calcolo $TT^\dagger Tx = TPx = TP(y+z) = Ty$, inoltre $Tx=T(y+z)=Ty$ ricordando che in questo esercizio $Pz=0 \iff Tz=0$. Viceversa posso usare il criterio che richiede $P^2=P,\, (Px,y)=(x,Py)$, che si verificano facilmente, per dimostrare P proiettore. L'aggiunto di un proiettore è un proiettore (si fa con questo stesso criterio).\\Infine l'ultima coimplicazione: sia x t.c. $Px=x$, allora $x=Px=T^\dagger (Tx)$, perciò basta porre $Tx=z$ e ho trovato z t.c. $T^\dagger z = x$. Viceversa voglio ora verificare che, dato $x=T^\dagger z$, vale $Px=x$; calcolo $Px=(T^\dagger T)(T^\dagger z) = (T T^\dagger T)^\dagger z = T^\dagger z = x$ dove il penultimo passaggio è verificato poichè se $\forall x\, Tx=Sx$ allora $T=S$ e perciò $T^\dagger= S^\dagger$.
+
+\section*{Appendice F}
+Es 5 del 7/2/06. In $\mathbb{L}^2[0,1]$ è dato l’operatore $T : Tf = g = x \int_{0}^{x}f(t)dt$. Dare un limite superiore a $||T||$ e mostrare che T non ha autovalori. Trovare $T^\dagger$.\\
+
+L'idea generale in questi casi è di guardare $|g(x)| \leq .?.$ e poi usare questa stima puntuale per controllare la norma di g.
+$x \int_{0}^{x}f(t)dt$ ha un integrale che pare naturale maggiorare mettendo un modulo nell'integrando, in modo da ricondursi alla norma in $\mathbb{L}^1$; poi si ricorda la disuguaglianza fra norme le norme di $\mathbb{L}^1,\,\mathbb{L}^2$: $||f||_1 \leq \sqrt{lunghezza\,intervallo} \,||f||_2$ e la si applica vedendo l'integrale come la norma $\mathbb{L}^1$ sull'intervallo [0, x]. Si ottiene dunque
+$$|x \int_{0}^{x}f(t)dt| \leq x\, ||f||_{1\,su\,[0,x]} \leq x \,\sqrt{x}||f||_{2\,su\,[0,x]} \leq x\,\sqrt{x} ||f||_{2\,su\,[0,1]}$$
+Dove l'ultimo passaggio si giustifica osservando che la norma cresce allargando l'intervallo. Dunque si ha
+$$||Tf||^2 = \int_{0}^{1} (Tf)^2(x) dx \leq \int_{0}^{1} x^3 ||f||_2^2 dx = \frac{1}{4} ||f||_2^2$$
+Osservazione: se prima si maggiorasse l'intervallo e poi si usasse la disuguaglianza fra le norme il coefficiente peggiorerebbe a $\frac{1}{\sqrt{3}}$ invece di $\frac{1}{2}$: verificarlo
+
+\end{document}
